@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import ThemeToggle from "./ThemeToggle";
 import { useState } from "react";
+import Container from "./Container";
+import { FiMenu } from "react-icons/fi"; // NEW
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -46,32 +48,30 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-20 border-b bg-white/90 backdrop-blur dark:bg-gray-900/90">
-      <nav className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-4">
+      <Container className="py-3 flex items-center gap-4">
         <Link href="/" className="font-bold text-lg">
           Simple Store
         </Link>
 
-        {/* Desktop */}
         <div className="ml-auto hidden md:flex items-center gap-3">
           <NavLinks />
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Hamburger */}
         <button
-          className="ml-auto md:hidden rounded border px-3 py-1 text-sm dark:border-gray-700"
+          className="ml-auto md:hidden rounded border px-2 py-1 text-sm dark:border-gray-700"
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
         >
-          ☰
+          <FiMenu size={18} />
         </button>
-      </nav>
+      </Container>
 
-      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t animate-[fadeIn_0.2s_ease-out_both]">
-          <div className="mx-auto max-w-5xl px-4 py-3 flex flex-col gap-3">
+        <div className="md:hidden border-t">
+          <Container className="py-3 flex flex-col gap-3">
             <NavLinks />
-          </div>
+          </Container>
         </div>
       )}
     </header>

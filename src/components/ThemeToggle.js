@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
-  // read saved preference on mount
   useEffect(() => {
     const saved = localStorage.getItem("theme");
     if (saved === "dark") {
@@ -14,9 +14,8 @@ export default function ThemeToggle() {
       document.documentElement.classList.remove("dark");
       setIsDark(false);
     } else {
-      // system preference fallback
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (prefersDark) {
+      const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (prefers) {
         document.documentElement.classList.add("dark");
         setIsDark(true);
       }
@@ -38,11 +37,12 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      className="rounded border px-3 py-1 text-sm hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
+      className="rounded border px-3 py-1 text-sm flex items-center gap-2 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
       aria-label="Toggle theme"
       title="Toggle theme"
     >
-      {isDark ? "Light" : "Dark"}
+      {isDark ? <FiSun size={16} /> : <FiMoon size={16} />}
+      <span className="hidden sm:inline">{isDark ? "Light" : "Dark"}</span>
     </button>
   );
 }
