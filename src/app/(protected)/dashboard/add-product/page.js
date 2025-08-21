@@ -8,7 +8,7 @@ export default async function AddProductPage() {
   if (!session) redirect("/login");
 
   return (
-    <main className="p-4 space-y-4">
+    <main className="mx-auto max-w-5xl px-4 py-6 space-y-4">
       <h2 className="text-2xl font-bold">Add Product</h2>
       <AddProductForm />
     </main>

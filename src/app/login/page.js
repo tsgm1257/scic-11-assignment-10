@@ -1,6 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -11,24 +12,53 @@ export default function LoginPage() {
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
-    // credentials flow will work after we add /register next step
     await signIn("credentials", { email, password, callbackUrl: "/products" });
   }
 
   return (
-    <main style={{ padding: 16 }}>
-      <h2>Login</h2>
+    <main className="mx-auto max-w-5xl px-4 py-6">
+      <div className="max-w-md mx-auto border rounded-lg p-6 bg-white dark:bg-gray-900">
+        <h2 className="text-2xl font-bold">Login</h2>
 
-      <form onSubmit={onSubmit} style={{ display: "grid", gap: 12, maxWidth: 360 }}>
-        <input name="email" type="email" placeholder="Email (for credentials)" required />
-        <input name="password" type="password" placeholder="Password" required />
-        <button disabled={loading}>{loading ? "Signing in..." : "Sign In"}</button>
-      </form>
+        <form onSubmit={onSubmit} className="mt-4 grid gap-3">
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            required
+            className="border rounded px-3 py-2"
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+            className="border rounded px-3 py-2"
+          />
+          <button
+            disabled={loading}
+            className="rounded bg-gray-900 text-white px-4 py-2 text-sm disabled:opacity-60 dark:bg-gray-100 dark:text-gray-900"
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
 
-      <div style={{ marginTop: 12 }}>
-        <button onClick={() => signIn("google", { callbackUrl: "/products" })}>
-          Sign in with Google
-        </button>
+        <div className="mt-3 text-sm">
+          No account?{" "}
+          <Link href="/register" className="text-blue-600 underline">
+            Register
+          </Link>
+        </div>
+
+        <div className="mt-2 text-sm">
+          Or sign in with{" "}
+          <button
+            onClick={() => signIn("google", { callbackUrl: "/products" })}
+            className="text-blue-600 underline"
+          >
+            Google
+          </button>
+        </div>
       </div>
     </main>
   );
