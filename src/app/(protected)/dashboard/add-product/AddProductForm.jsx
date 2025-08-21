@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function AddProductForm() {
   const [loading, setLoading] = useState(false);
@@ -25,10 +26,11 @@ export default function AddProductForm() {
 
     setLoading(false);
     if (res.ok) {
+      toast.success("Product added!");
       router.push("/products");
     } else {
       const data = await res.json().catch(() => ({}));
-      alert(data.error || "Failed to add product");
+      toast.error(data.error || "Failed to add product");
     }
   }
 

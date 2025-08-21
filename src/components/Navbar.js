@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSession, signOut, signIn } from "next-auth/react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -8,10 +9,14 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-10 border-b bg-white/90 backdrop-blur dark:bg-gray-900/90">
       <nav className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-4">
-        <Link href="/" className="font-bold text-lg">Simple Store</Link>
+        <Link href="/" className="font-bold text-lg">
+          Simple Store
+        </Link>
 
-        <div className="ml-auto flex items-center gap-4">
-          <Link href="/products" className="hover:underline">Products</Link>
+        <div className="ml-auto flex items-center gap-3">
+          <Link href="/products" className="hover:underline">
+            Products
+          </Link>
 
           {session ? (
             <>
@@ -27,7 +32,9 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link href="/login" className="hover:underline">Login</Link>
+              <Link href="/login" className="hover:underline">
+                Login
+              </Link>
               <button
                 onClick={() => signIn("google", { callbackUrl: "/products" })}
                 className="rounded bg-gray-900 text-white px-3 py-1 text-sm dark:bg-gray-100 dark:text-gray-900"
@@ -36,6 +43,9 @@ export default function Navbar() {
               </button>
             </>
           )}
+
+          {/* Theme toggle */}
+          <ThemeToggle />
         </div>
       </nav>
     </header>
