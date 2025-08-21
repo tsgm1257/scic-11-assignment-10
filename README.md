@@ -6,8 +6,7 @@ A modern, minimal storefront built with **Next.js 15 (App Router)**, **NextAuth*
 
 ## Live Site
 
-**URL:** https://YOUR-VERCEL-APP.vercel.app  
-_(Replace with your deployed link once you push to Vercel.)_
+**URL:** https://scic-11-assignment-10.vercel.app  
 
 ---
 
