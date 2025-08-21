@@ -13,13 +13,13 @@ export default function RegisterPage() {
     const payload = {
       name: form.get("name"),
       email: form.get("email"),
-      password: form.get("password")
+      password: form.get("password"),
     };
 
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
 
     setLoading(false);
@@ -34,11 +34,21 @@ export default function RegisterPage() {
   return (
     <main style={{ padding: 16 }}>
       <h2>Register</h2>
-      <form onSubmit={onSubmit} style={{ display: "grid", gap: 12, maxWidth: 360 }}>
+      <form
+        onSubmit={onSubmit}
+        style={{ display: "grid", gap: 12, maxWidth: 360 }}
+      >
         <input name="name" placeholder="Name (optional)" />
         <input name="email" type="email" placeholder="Email" required />
-        <input name="password" type="password" placeholder="Password (min 6)" required />
-        <button disabled={loading}>{loading ? "Creating..." : "Create Account"}</button>
+        <input
+          name="password"
+          type="password"
+          placeholder="Password (min 6)"
+          required
+        />
+        <button disabled={loading}>
+          {loading ? "Creating..." : "Create Account"}
+        </button>
       </form>
     </main>
   );

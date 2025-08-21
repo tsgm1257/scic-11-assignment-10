@@ -26,7 +26,7 @@ export default function LoginPage() {
       </form>
 
       <div style={{ marginTop: 12 }}>
-        <button onClick={() => signIn("google", { callbackUrl: "/" })}>
+        <button onClick={() => signIn("google", { callbackUrl: "/products" })}>
           Sign in with Google
         </button>
       </div>
